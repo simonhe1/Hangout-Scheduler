@@ -4,17 +4,16 @@ class Day extends Component {
     constructor(props){
         super(props);
         this.state = {
-            id: props.id
+            id: props.id,
+            day: props.day
         }
-        console.log(this.state.id);
     }
 
     render() { 
         return (
-            <button>
-               Hello! I'm day number {this.state.id}
-               
-            </button>
+            <td>
+               {this.state.day}
+            </td>
         );
     }
 }

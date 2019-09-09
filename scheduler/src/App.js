@@ -1,28 +1,37 @@
 import './App.css';
 import React, { Component } from 'react';
 import Calendar from './Calendar';
+import SwitchMonths from './SwitchMonths';
 
 class App extends Component {
-  state = { 
-    Months: [
-      {name: 'January',days: 31, weeks: 5},
-      {name: 'February',days: 28, weeks: 5},
-      {name: 'March',days: 31, weeks: 6},
-      {name: 'April',days: 30, weeks: 5},
-      {name: 'May',days: 31, weeks: 5},
-      {name: 'June',days: 30, weeks: 6},
-      {name: 'July',days: 31, weeks: 5},
-      {name: 'August',days: 31, weeks: 5},
-      {name: 'September',days: 30, weeks: 5},
-      {name: 'October',days: 31, weeks: 5},
-      {name: 'November',days: 30, weeks: 5},
-      {name: 'December',days: 31, weeks: 5},
+  state = {
+    months: [
+      "January",
+      "Februrary",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
     ],
-  };
-  render() { 
+  }
+  render() {
+    let today = new Date();
     return ( 
       <React.Fragment>
-        <Calendar month={this.state.Months}/>
+        <div className="container-fluid">
+          <Calendar 
+          monthAsString={this.state.months[today.getMonth()]}
+          monthAsNumber={today.getMonth()}
+          year={today.getFullYear()}
+          />
+          <SwitchMonths />
+        </div>
       </React.Fragment>
     );
   }
