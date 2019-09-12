@@ -1,12 +1,20 @@
 import React, { Component } from 'react';
 class SwitchMonths extends Component {
-    state = {  }
+    constructor(props){
+        super(props);
+        this.state = { };
+    }
+
     render() { 
         return (
-            <React.Fragment>
-                <button>Previous</button>
-                <button>Next</button>
-            </React.Fragment>
+            <span>
+                <button className="btn btn-primary" onClick={() => this.props.switch(-1)}>
+                    Previous
+                </button>
+                <button className="btn btn-secondary" onClick={() => this.props.switch(1)}>
+                    Next
+                </button>
+            </span>
         );
     }
 }

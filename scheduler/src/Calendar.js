@@ -1,35 +1,37 @@
 import React, { Component } from 'react';
 import Day from './Day';
+import SwitchMonths from './SwitchMonths';
 
 class Calendar extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            monthString: props.monthAsString,
-            monthNum: props.monthAsNumber,
-            year: props.year
-        };
-        this.makeDays = this.makeDays.bind(this);
-    }
+    // constructor(props){
+    //     super(props);
+    //     this.state = {
+    //         daysView : [],
+    //     };
+    //     this.makeDays = this.makeDays.bind(this);
+    // }
+
     makeDays(month,year){
         let firstDay = new Date(year, month).getDay();
         let daysInMonth = 32 - new Date(year,month,32).getDate();
-        const DayObjs = [];
         let Days = 1;
-        for(let i=0;i<6;i++){
-            DayObjs.push(<tr key={i}></tr>);
+        let dayObjs = [];
+        for(let i=0;i<5;i++){
+            let weekObjs = [];
             for(let j=0;j<7;j++){
-                console.log(DayObjs);
-                if(i === 0 && j < firstDay){
-                    DayObjs.push(<Day key={Days}/>);
-                }else if (Days > daysInMonth){ break; }
-                else{
-                    DayObjs.push(<Day day={Days} key={Days}/>);
+                if((i === 0 && j < firstDay) || Days > daysInMonth){
+                    weekObjs.push(<Day key={i*j + j} day={0}/>);
                 }
-                Days++;
+                // else if (Days > daysInMonth){ break; }
+                else{
+                    weekObjs.push(<Day day={Days} key={i*j + j}/>);
+                    Days++;
+                }
             }
+            dayObjs.push(<tr key={"tr" + i}>{weekObjs}</tr>)
         }
-        return DayObjs;
+        console.log(dayObjs);
+        return dayObjs;
     }
 
     updateCalendar (month,year) {
@@ -37,7 +39,7 @@ class Calendar extends Component {
             <React.Fragment>
             <h1>Calendar</h1>
             <div className="card">
-                <h3 className="card-header">{this.state.monthString}</h3>
+                <h3 className="card-header">{this.props.monthAsString},{this.props.year}</h3>
                 <table className="table table-bordered">
                     <thead>
                         <tr>
@@ -54,28 +56,18 @@ class Calendar extends Component {
                         {this.makeDays(month,year)}
                     </tbody>
                 </table>
+                <SwitchMonths 
+                    switch={this.props.onSwitch}
+                />
             </div>
             </React.Fragment>
         );
-        // const totalDays = [];
-        // for(var i=0;i<=this.state.days;i++){
-        //     if(i % 7 === 0){ 
-        //         totalDays.push(<div className="row" key={i}></div>);
-        //     }
-        //     totalDays.push(
-        //     <div className="col-xs-4">
-        //         <Day key={i} id={i}/>
-        //     </div>
-
-        //     );
-        // }
-        // return totalDays;
         return header;
     }
     render() {
         return (
             <div>
-                {this.updateCalendar(this.state.monthNum,this.state.year)}
+                {this.updateCalendar(this.props.monthAsNumber,this.props.year)}
             </div>            
         );
     }
