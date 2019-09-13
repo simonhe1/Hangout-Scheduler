@@ -30,7 +30,6 @@ class Calendar extends Component {
             }
             dayObjs.push(<tr key={"tr" + i}>{weekObjs}</tr>)
         }
-        console.log(dayObjs);
         return dayObjs;
     }
 

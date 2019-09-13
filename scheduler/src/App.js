@@ -20,7 +20,8 @@ class App extends Component {
         "November",
         "December"
       ],
-      offSet: 0,
+      offsetMonth: 0,
+      offSetYear: 0,
       today: new Date()
     };
     this.handleSwitch = this.handleSwitch.bind(this);
@@ -28,16 +29,28 @@ class App extends Component {
   }
 
   handleSwitch(indexMonth){
-    let newMonth = this.state.offSet;
+    let newMonth = this.state.offsetMonth;
     newMonth = newMonth + indexMonth;
+    let newYear = this.state.offSetYear;
+    console.log(newMonth);
+    newYear = Math.floor((newMonth-12) / 12);
     // console.log(this.getCurrentMonth());
-    this.setState({offSet:newMonth});
-    console.log('Offset:',this.state.offSet);
+    this.setState(
+      {
+        offsetMonth:newMonth,
+        offSetYear: newYear   
+      });
+  }
+
+  getCurrentYear(){
+    let offsetMonthsToYear = Math.floor((this.state.today.getMonth() + this.state.offsetMonth)/12);
+    return this.state.today.getFullYear()+offsetMonthsToYear;
   }
 
   getCurrentMonth(){
-    // console.log((this.state.today.getMonth()+this.state.offSet)%12);
-    return (this.state.today.getMonth()+this.state.offSet)%12;
+    console.log(`12 + ${this.state.today.getMonth()} + ${this.state.offsetMonth} =`,
+    12 + this.state.today.getMonth() + this.state.offsetMonth);
+    return (12+this.state.today.getMonth()+(this.state.offsetMonth%12))%12;
   }
 
   render() {
@@ -47,7 +60,8 @@ class App extends Component {
           <Calendar 
             monthAsString={this.state.months[this.getCurrentMonth()]}
             monthAsNumber={this.getCurrentMonth()}
-            year={this.state.today.getFullYear()}
+            year ={this.getCurrentYear()}
+            // year={this.state.today.getFullYear()+this.state.offSetYear}
             onSwitch={this.handleSwitch}
           />
         </div>
