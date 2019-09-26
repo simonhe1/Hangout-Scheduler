@@ -1,6 +1,9 @@
 import './App.css';
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import Navbar from './Navbar';
 import Calendar from './Calendar';
+import Info from './Info';
 
 class App extends Component {
   constructor(props){
@@ -34,7 +37,6 @@ class App extends Component {
     let newYear = this.state.offSetYear;
     console.log(newMonth);
     newYear = Math.floor((newMonth-12) / 12);
-    // console.log(this.getCurrentMonth());
     this.setState(
       {
         offsetMonth:newMonth,
@@ -48,23 +50,32 @@ class App extends Component {
   }
 
   getCurrentMonth(){
-    console.log(`12 + ${this.state.today.getMonth()} + ${this.state.offsetMonth} =`,
-    12 + this.state.today.getMonth() + this.state.offsetMonth);
     return (12+this.state.today.getMonth()+(this.state.offsetMonth%12))%12;
   }
 
   render() {
     return (
       <React.Fragment>
-        <div className="container-fluid">
-          <Calendar 
-            monthAsString={this.state.months[this.getCurrentMonth()]}
-            monthAsNumber={this.getCurrentMonth()}
-            year ={this.getCurrentYear()}
-            // year={this.state.today.getFullYear()+this.state.offSetYear}
-            onSwitch={this.handleSwitch}
-          />
-        </div>
+        <Router>
+          <div className="container-fluid">
+            <Navbar />
+            <Switch>
+              <Route path="/" exact render={(props) => 
+                (<Calendar 
+                  monthAsString={this.state.months[this.getCurrentMonth()]}
+                  monthAsNumber={this.getCurrentMonth()}
+                  year ={this.getCurrentYear()}
+                  onSwitch={this.handleSwitch}
+                  {...props}/>)}
+              />
+              <Route path="/info" exact render={(props) => 
+                (<Info 
+                  {...props}/>)}
+              />
+              
+            </Switch>
+          </div>
+        </Router>
       </React.Fragment>
     );
   }
