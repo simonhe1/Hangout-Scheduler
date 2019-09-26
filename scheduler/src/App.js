@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Navbar from './Navbar';
 import Calendar from './Calendar';
 import Info from './Info';
+import Pet from './Pet';
 
 class App extends Component {
   constructor(props){
@@ -25,7 +26,8 @@ class App extends Component {
       ],
       offsetMonth: 0,
       offSetYear: 0,
-      today: new Date()
+      today: new Date(),
+      pets: [{name: 'Spike', age: 17},{name: 'Peanut', age: 24}]
     };
     this.handleSwitch = this.handleSwitch.bind(this);
     this.getCurrentMonth = this.getCurrentMonth.bind(this);
@@ -54,11 +56,14 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state.pets);
     return (
       <React.Fragment>
         <Router>
           <div className="container-fluid">
-            <Navbar />
+            <Navbar 
+              userName="Simon"            
+            />
             <Switch>
               <Route path="/" exact render={(props) => 
                 (<Calendar 
@@ -72,7 +77,11 @@ class App extends Component {
                 (<Info 
                   {...props}/>)}
               />
-              
+              <Route path="/pets" exact render={(props) => 
+                (<Pet 
+                  pets={this.state.pets}
+                  {...props}/>)}
+              />          
             </Switch>
           </div>
         </Router>

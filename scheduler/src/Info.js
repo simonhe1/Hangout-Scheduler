@@ -52,7 +52,7 @@ class Info extends Component {
                         <Form.Label>State</Form.Label>
                         <Form.Control as="select" required>
                             {nyStates.map(abrv =>{
-                                return <option>{abrv}</option>
+                                return <option key={abrv}>{abrv}</option>
                             })}
                         </Form.Control> 
                     </Form.Group>

@@ -22,8 +22,8 @@ class NavBar extends Component {
             >
                 <Navbar.Brand href="#">TruWalks</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="justify-content-end">
+                <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
+                    <Nav>
                         <Nav.Link>
                             <Link to="/">Home</Link>
                         </Nav.Link>
@@ -31,9 +31,10 @@ class NavBar extends Component {
                             <Link to="/info/">My Info</Link>
                         </Nav.Link>
                         <Nav.Link>
-                            <Link href="/pet/">My Pets</Link>
+                            <Link to="/pets/">My Pets</Link>
                         </Nav.Link>
-                        <Navbar.Text className="justify-content-end">
+                        <Navbar.Text>
+                            
                             {this.props.userName}
                         </Navbar.Text>
                     </Nav>
