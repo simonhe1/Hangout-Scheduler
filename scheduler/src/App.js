@@ -1,4 +1,3 @@
-import './App.css';
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Navbar from './Navbar';
@@ -27,7 +26,9 @@ class App extends Component {
       offsetMonth: 0,
       offSetYear: 0,
       today: new Date(),
-      pets: [{name: 'Spike', age: 17},{name: 'Peanut', age: 24}]
+      pets: [{name: 'Spike', age: 17, sex: 'Female'},
+            {name: 'Peanut', age: 24, sex: 'Female'},
+            {name: 'Lucky',  age: 20, sex: 'Male'}],
     };
     this.handleSwitch = this.handleSwitch.bind(this);
     this.getCurrentMonth = this.getCurrentMonth.bind(this);

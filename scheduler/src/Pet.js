@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Table from 'react-bootstrap/Table';
+
 class Pet extends Component {
     render() { 
         return (
@@ -13,13 +15,25 @@ class Pet extends Component {
                         </Button>                    
                     </Col>
                     <Col sm={11}>
-                        <table className="table table-bordered">
-                            <tbody id="calendar-body">
-                                {this.props.pets.map((obj,index) =>{
-                                    return <tr key={index}>{obj.name},{obj.age}</tr>
-                                })}
-                            </tbody>
-                        </table>
+                        {this.props.pets.map((obj,index) =>{
+                            return (
+                                <Table key={index} bordered>
+                                    <thead>
+                                        <tr>
+                                            <td colSpan="12" className="text-center">
+                                                {obj.name}
+                                            </td> 
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td className="text-center">{obj.age}</td>
+                                            <td className="text-center">{obj.sex}</td>
+                                        </tr>
+                                    </tbody>
+                                </Table>
+                            );
+                        })}
                     </Col>
                 </Row>
             </React.Fragment> 

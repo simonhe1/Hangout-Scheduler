@@ -23,18 +23,24 @@ class NavBar extends Component {
                 <Navbar.Brand href="#">TruWalks</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
-                    <Nav>
-                        <Nav.Link>
-                            <Link to="/">Home</Link>
-                        </Nav.Link>
-                        <Nav.Link>
-                            <Link to="/info/">My Info</Link>
-                        </Nav.Link>
-                        <Nav.Link>
-                            <Link to="/pets/">My Pets</Link>
-                        </Nav.Link>
+                    <Nav as="ul">
+                        <Nav.Item as="li">
+                            <Nav.Link>
+                                <Link to="/">Home</Link>
+                            </Nav.Link>
+                        </Nav.Item >
+                        <Nav.Item as="li">
+                            <Nav.Link>
+                                <Link to="/info/">My Info</Link>
+                            </Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item as="li">
+                            <Nav.Link>
+                                <Link to="/pets/">My Pets</Link>
+                            </Nav.Link>
+                        </Nav.Item>
                         <Navbar.Text>
-                            
+                            <img src="/assets/tempDogFaceProfile.png" width="30" height="30" className="d-inline-block align-top" alt="Hello" />
                             {this.props.userName}
                         </Navbar.Text>
                     </Nav>
