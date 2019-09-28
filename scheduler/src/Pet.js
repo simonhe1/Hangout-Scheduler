@@ -3,18 +3,27 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import Nav from 'react-bootstrap/Nav';
+import { Link } from 'react-router-dom';
+import AddPet from './AddPet';
 
 class Pet extends Component {
+        constructor(props) {
+        super(props);
+    }
     render() { 
         return (
             <React.Fragment>
-                <Row>
-                    <Col sm={1}>
-                        <Button>
-                            Add Pet
-                        </Button>                    
-                    </Col>
-                    <Col sm={11}>
+                    <Button href="/pets/addpet">
+                         Add Pet
+                    </Button>
+                    <Switch>
+                        <Route path="/pets/addpet" exact render={(props) => 
+                            (<AddPet/>)} />          
+                    </Switch>                
+                    <Row>
+                    <Col sm={12}>
                         {this.props.pets.map((obj,index) =>{
                             return (
                                 <Table key={index} bordered>
@@ -37,8 +46,8 @@ class Pet extends Component {
                     </Col>
                 </Row>
             </React.Fragment> 
+
         );
     }
-}
- 
+}             
 export default Pet;
